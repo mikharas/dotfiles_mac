@@ -1,0 +1,46 @@
+# TMUX ALIASES
+alias ts='tmux'         # Start a new unnamed tmux session
+alias tsn='tmux new -s' # Start a new named tmux session
+alias tl='tmux ls'     # List all active sessions
+alias ta='tmux a -t'   # Attach a session (by index or name)
+alias tk='tmux kill-session -t' # Kill a session (by index or name)
+alias tks='tmux kill-server' # kill all sessions
+
+# alias recent_projects
+alias jin='cd ~/jinenertech/src'
+alias boardb='cd ~/Documents/hello2/backend'
+alias boardf='cd ~/Documents/hello2/frontend'
+alias lateb='cd ~/Documents/urlate/backend'
+alias latef='cd ~/Documents/urlate/frontend'
+
+# alias mpsyt='/usr/local/Cellar/mps-youtube/0.2.8_10/bin/mpsyt'
+alias zzz='systemctl suspend'
+alias key='setxkbmap -option ctrl:swapcaps'
+alias scr='cd /usr/share/texmf-dist/tex/latex/scribe'
+alias ctex='nvim ~/.config/nvim/plugged/vim-snippets/UltiSnips/tex.snippets'
+alias shortcut='gnome-desktop-item-edit --create-new ~/Desktop'
+alias quit='kill -9 -1'
+alias pacadd='python /home/sarah/Insync/linux/installation/add_package.py'
+alias pi='yay -S'
+alias pii='yay -Si'
+alias pu='yay -Rs'
+alias plist='yay -Qqe'
+alias pipi='sudo pip install'
+alias pipu='sudo pip uninstall'
+alias piplist='pip list'
+alias l='ls -1'
+alias s='sudo'
+alias gll='git lg2'
+alias nlist='npm list'
+alias dis='terminal-discord'
+alias fan='/home/sarah/Insync/linux/fan.py'
+alias b='cd /usr/local/bin'
+alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+alias mp3='mp3info -i'
+alias mus='/home/sarah/Insync/linux/youtube.sh'
+# config files
+alias cnvim='nvim /home/sarah/.config/nvim/init.vim'
+alias ci3='nvim /home/sarah/.config/i3/config'
+alias cterm='nvim /home/sarah/.config/termite/config'
+alias cpoly='nvim /home/sarah/.config/polybar/config'
+alias crofi='cd /home/sarah/.config/rofi'
