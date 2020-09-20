@@ -179,9 +179,11 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'moll/vim-node'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-"
 
-" Plug 'Quramy/tsuquyomi'
+" ----------- JAVA -------------"
+Plug 'uiiaoo/java-syntax.vim'
+
+"  Plug 'Quramy/tsuquyomi'
 Plug 'elzr/vim-json'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
@@ -452,7 +454,7 @@ let g:indentLine_char = '║'
 
 " VIMTEX -----------------------------------
 
-let g:vimtex_view_general_viewer = 'evince'
+let g:vimtex_view_general_viewer = 'skim'
 let g:vimtex_compiler_progname = 'nvr'
 let g:tex_flavor='latex'
 let g:vimtex_quickfix_mode=0
@@ -547,3 +549,7 @@ autocmd FileType python call MyCustomHighlights()
 " Gruvbox 8 ----------------------------------
 
 let g:gruvbox_transp_bg = 1
+
+" Ultisnippets/Vim-snippets ----------------------
+
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "personal"]

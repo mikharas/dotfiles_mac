@@ -93,7 +93,7 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Cursor /\s\+$/
 autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript.tsx
 
 " tabs and spaces handling
-au BufNewFile,BufRead *.py
+au BufNewFile,BufRead *.py,*.md
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |

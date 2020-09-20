@@ -5,8 +5,7 @@ export const refreshFrequency = 250;
 // const command = "lib/workspace.sh";
 // const refreshFrequency = 250; // ms
 
-// const colors = ['#D27278', '#A1C181', '#E0C085', '#83a598', '#fabd2f', '#fb4934', '#8ec07c'];
-const colors = ['#b48eaa', '#8fbcbb', '#a3be8c']
+const colors = ['#b48eaa', '#cb6153', '#ffa674', '#fec26a', '#99bfab', '#b48c8d']
 
 
 const renderSpace = (appList, spaceColor, spaceId) => {
@@ -27,6 +26,8 @@ const renderAppIcon = (appName, visible) => {
 
     if (appName == 'Google Chrome') {
         className="fa fa-chrome";
+    } else if (appName == 'zoom.us') {
+        className="fa fa-video-camera"
     } else if (appName == 'Unity') {
         className="fa fa-gamepad";
     } else if (appName == 'Discord') {
@@ -107,8 +108,8 @@ const style = {
     marginLeft: '25px',
     marginRight: '25px',
     padding: '3px 6px',
-    border: '2px solid #ebcb8b',
-    backgroundColor: '#2e3440',
+    border: '2px solid #ffa674',
+    backgroundColor: '#393833',
     color: '#fff',
     fontFamily: 'Roboto',
     fontSize: '12px',
