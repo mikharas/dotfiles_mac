@@ -182,6 +182,7 @@ Plug 'peitalin/vim-jsx-typescript'
 
 " ----------- JAVA -------------"
 Plug 'uiiaoo/java-syntax.vim'
+Plug 'vim-test/vim-test'
 
 "  Plug 'Quramy/tsuquyomi'
 Plug 'elzr/vim-json'

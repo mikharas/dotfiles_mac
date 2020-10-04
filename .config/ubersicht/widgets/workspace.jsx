@@ -28,6 +28,8 @@ const renderAppIcon = (appName, visible) => {
         className="fa fa-chrome";
     } else if (appName == 'zoom.us') {
         className="fa fa-video-camera"
+    } else if (appName == 'KakaoTalk') {
+        className="fa fa-comments"
     } else if (appName == 'Unity') {
         className="fa fa-gamepad";
     } else if (appName == 'Discord') {

@@ -8,6 +8,7 @@ flake8
 heroku/brew/heroku
 htop
 mariadb
+maven
 mono
 mps-youtube
 mpv
