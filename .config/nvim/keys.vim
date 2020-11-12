@@ -95,16 +95,10 @@ autocmd FileType python nnoremap gm :CocCommand python.execInTerminal<CR>
 autocmd FileType tex nnoremap gm :VimtexCompile<CR>
 
 " markdown preview
+command MdToPdf !pandoc % -o %:r.pdf --template=template.tex --pdf-engine=lualatex
 autocmd FileType markdown nnoremap gm :MarkdownPreview<CR>
+autocmd FileType markdown nnoremap cm :MdToPdf<CR>
 
-function Vimtex()
-    set concealcursor=""
-    set updatetime=500
-    setlocal spell
-    set spelllang=en_us
-    hi! link Conceal Normal
-endfunction
-autocmd FileType tex nnoremap <leader>j :call Vimtex()<CR>
 
 " mappings to jump to changed blocks for signify (git)
 nmap <leader>sn <plug>(signify-next-hunk)
@@ -142,23 +136,6 @@ nmap <leader>c :Commands<CR>
 
 " fugitive status shortcut
 nmap <leader>gs :Gstatus<CR>
-
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
 
 " omnisharp
 augroup omnisharp_commands

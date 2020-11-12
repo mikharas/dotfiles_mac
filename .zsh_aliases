@@ -14,6 +14,7 @@ alias lateb='cd ~/Documents/urlate/backend'
 alias latef='cd ~/Documents/urlate/frontend'
 
 # alias mpsyt='/usr/local/Cellar/mps-youtube/0.2.8_10/bin/mpsyt'
+alias nvim='/Users/mac/nvim-osx64/bin/nvim'
 alias zzz='systemctl suspend'
 alias key='setxkbmap -option ctrl:swapcaps'
 alias scr='cd /usr/share/texmf-dist/tex/latex/scribe'

@@ -1,4 +1,5 @@
 autopep8
+brightness
 calcurse
 cmake
 cmus
@@ -13,7 +14,6 @@ mono
 mps-youtube
 mpv
 neofetch
-neovim
 openjdk
 pandoc
 pylint

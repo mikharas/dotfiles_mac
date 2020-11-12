@@ -1,4 +1,7 @@
 " ====== GENERAL SETTINGS ===========
+" buffer
+set hidden
+
 " enable mouse support
 set mouse=a
 
@@ -90,10 +93,10 @@ command Make !make; ./test; make clean
 " ====== FILETYPE SPECIFIC ===========
 " flag unnecessary whitespace
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Cursor /\s\+$/
-autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript.tsx
+" autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript.tsx
 
 " tabs and spaces handling
-au BufNewFile,BufRead *.py,*.md
+au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
@@ -101,6 +104,14 @@ au BufNewFile,BufRead *.py,*.md
     \ set expandtab |
     \ set autoindent |
     " \ set fileformat=unix
+
+au BufNewFile,BufRead *.md,*.txt,*.tex,*.latex
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set autoindent |
+    \ set textwidth=80 |
+    \ set expandtab |
 
 au BufNewFile,BufRead *.ts,*.tsx,*.js,*.xml,*.html,*.css
     \ set tabstop=2 |
