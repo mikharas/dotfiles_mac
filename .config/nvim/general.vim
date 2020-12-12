@@ -14,9 +14,13 @@ set fillchars+=vert:\
 " use true color SUPPORT
 set termguicolors
 
-"coloscheme
+" remove line numbers on terminal
+autocmd TermOpen * setlocal nonumber norelativenumber
+
+"colorscheme
 let &t_Co = 256
-colorscheme gruvbox8
+set background=dark
+colorscheme vim-material
 
 let g:python3_host_prog = '/usr/bin/python3'
 
@@ -97,29 +101,28 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Cursor /\s\+$/
 
 " tabs and spaces handling
 au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
+    \ set tabstop=4     |
     \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
-    \ set expandtab |
-    \ set autoindent |
-    " \ set fileformat=unix
+    \ set shiftwidth=4  |
+    \ set textwidth=79  |
+    \ set expandtab     |
+    \ set autoindent    |
 
 au BufNewFile,BufRead *.md,*.txt,*.tex,*.latex
-    \ set tabstop=4 |
+    \ set tabstop=4     |
     \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set autoindent |
-    \ set textwidth=80 |
-    \ set expandtab |
+    \ set shiftwidth=4  |
+    \ set autoindent    |
+    \ set textwidth=80  |
+    \ set expandtab     |
 
 au BufNewFile,BufRead *.ts,*.tsx,*.js,*.xml,*.html,*.css
-    \ set tabstop=2 |
+    \ set tabstop=2     |
     \ set softtabstop=2 |
-    \ set shiftwidth=2 |
-    \ set autoindent |
-    \ set smartindent |
-    \ set expandtab |
+    \ set shiftwidth=2  |
+    \ set autoindent    |
+    \ set smartindent   |
+    \ set expandtab     |
 
 "refresh syntax on buf exit and enter for bug in styled components
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
@@ -130,12 +133,13 @@ set spelllang=en_us
 set spellfile=~/.config/nvim/spell/en.utf-8.add
 autocmd BufNewFile,BufRead *.md,*.txt,*.tex setlocal spell
 
-
+" enable folding for js and ts (may not work atm)
 augroup javascript_folding
     au!
     au FileType javascript,typescript setlocal foldmethod=syntax
 augroup END
 
+" Formatting c# files
 let g:uncrustifyCfgFile = '~/.uncrustify.cfg'
 function! UncrustifyFunc(options) range
     exec a:firstline.','.a:lastline.'!uncrustify '.a:options

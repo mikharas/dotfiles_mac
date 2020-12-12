@@ -22,27 +22,31 @@ nnoremap <C-L> <C-W><C-L>
 inoremap <C-]> <C-X><C-O>
 nnoremap <C-H> <C-W><C-H>
 
+" write and delete all buffers except for current one
+nnoremap <leader>bd :w \| %bd \| e#<CR>
+
+" refreshes all buffers
+nnoremap <leader>br :bufdo e<CR>
+
 " map tt :tabnew
 map <M-Right> :tabn<CR>
 imap <M-Right> <ESC>:tabn<CR>
 map <M-Left> :tabp<CR>
 imap <M-Left> <ESC>:tabp<CR>
+map <M-Down> :tabclose<CR>
 
 " window swap
 nnoremap <silent> <leader>w : call WindowSwap#EasyWindowSwap()<CR>
 
-" mapping for window chooser
-nmap - <Plug>(choosewin)
-
-" Set filetype
-autocmd FileType javascript nmap <buffer> <leader>j :set ft=typescript<CR>
-autocmd FileType typescript,html nmap <buffer> <leader>j :set ft=javascript<CR>
 " Toggle terminal on/off (neovim)
-nnoremap <leader>t :call TermToggle(12)<CR>
-tnoremap <leader>t <C-\><C-n>:call TermToggle(12)<CR>
+nnoremap <leader>r :call TermToggle(20)<CR>
+tnoremap <leader>t <C-\><C-n>:call TermToggle(20)<CR>
 
 "JSDoc
 autocmd FileType javascript nmap <leader>d :JsDoc<CR>
+
+"JAVA align comments
+autocmd FileType java xmap <leader>a :Tab /\/\/<CR>
 
 " toggle tagbar display
 map <leader>2 :TagbarToggle<CR>
@@ -59,6 +63,7 @@ nnoremap <leader>e :ALEFix<CR>
 " eslint correction
 autocmd FileType javascript,typescript,typescript.tsx nnoremap <leader>e :CocCommand eslint.executeAutofix<CR>
 
+" ========== ASYNCRUN ===============
 function! s:compile_and_run()
  let l:cmd = {
  \ 'c' : "gcc % -o %<; time ./%<",
@@ -96,7 +101,7 @@ autocmd FileType tex nnoremap gm :VimtexCompile<CR>
 
 " markdown preview
 command MdToPdf !pandoc % -o %:r.pdf --template=template.tex --pdf-engine=lualatex
-autocmd FileType markdown nnoremap gm :MarkdownPreview<CR>
+autocmd FileType markdown nnoremap gm :LivedownToggle<CR>
 autocmd FileType markdown nnoremap cm :MdToPdf<CR>
 
 
@@ -120,22 +125,26 @@ nmap <leader>F :Rg<CR>
 nmap <leader>f :Lines<CR>
 
 " search under the cursor
-nmap <leader>r :exec 'Rg' expand('<cword>')<CR>
+" nmap <leader>r :exec 'Rg' expand('<cword>')<CR>
 
 " tags in all buffers
 nmap <leader>G :Tags<CR>
 
 " tags (symbols) in current file finder mapping
-nmap <leader>g :BTag<CR>
+" nmap <leader>g :BTag<CR>
 
 " list all files in buffer
-nmap <leader>b :Buffers<CR>
+nmap <leader>bb :Buffers<CR>
 
 " commands finder mapping
 nmap <leader>c :Commands<CR>
 
-" fugitive status shortcut
+" fugitive shortcuts
 nmap <leader>gs :Gstatus<CR>
+nmap <leader>gl :Gclog<CR>
+nmap <leader>gdf :G difftool
+nmap <leader>gdd :Gdiff
+nmap <leader>gb :Gblame %<CR>
 
 " omnisharp
 augroup omnisharp_commands

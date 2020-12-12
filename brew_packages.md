@@ -14,6 +14,7 @@ mono
 mps-youtube
 mpv
 neofetch
+neovim (HEAD)
 openjdk
 pandoc
 pylint

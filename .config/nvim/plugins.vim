@@ -41,9 +41,6 @@ Plug 'majutsushi/tagbar'
 " Language syntax parser
 Plug 'nvim-treesitter/nvim-treesitter'
 
-" Scroll bar
-Plug 'Xuyuanp/scrollbar.nvim'
-
 " Search results counter
 Plug 'vim-scripts/IndexedSearch'
 
@@ -55,9 +52,6 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
-" Pending tasks list
-Plug 'fisadev/FixedTaskList.vim'
 
 " Intellisense engine with full language server protocol support as VSCode
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -131,12 +125,8 @@ Plug 'yuttie/comfortable-motion.vim'
 
 " ---------- JAVASCRIPT -----------"
 
-" Plug 'maxmellon/vim-jsx-pretty'
-" Plug 'pangloss/vim-javascript'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'moll/vim-node'
-" Plug 'leafgarland/typescript-vim'
-" Plug 'peitalin/vim-jsx-typescript'
 
 " ----------- JAVA -------------"
 Plug 'vim-test/vim-test'
@@ -150,7 +140,9 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 
 Plug 'gabrielelana/vim-markdown'
 
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+Plug 'shime/vim-livedown'
+
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 
 Plug 'lvht/tagbar-markdown'
 
@@ -174,6 +166,7 @@ Plug 'lifepillar/vim-gruvbox8'
 Plug 'ryanoasis/vim-devicons'
 
 " ------------------ INACTIVE PLUGINS ----------------- "
+" Plug 'Xuyuanp/scrollbar.nvim'
 " Plug 'neomutt/neomutt.vim'
 " Plug 'vim-scripts/YankRing.vim'
 " Plug 'joshdick/onedark.vim'
@@ -206,21 +199,6 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" SCROLLBAR --------------------
-augroup ScrollbarInit
-  autocmd!
-  autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
-  autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
-  autocmd WinLeave,FocusLost             * silent! lua require('scrollbar').clear()
-augroup end
-
-let g:scrollbar_excluded_filetypes = ['nerdtree', 'tagbar']
-
-let g:scrollbar_highlight = {
-\ 'head': 'pythonFunction',
-\ 'body': 'pythonFunction',
-\ 'tail': 'pythonFunction',
-\ }
 
 " JSDOC
 let g:jsdoc_allow_input_prompt = 1
@@ -372,7 +350,7 @@ aug END
 " Airline -------------------------------
 
 let g:airline_powerline_fonts = 0
-let g:airline_theme = 'gruvbox_material'
+let g:airline_theme = 'material'
 let g:airline#extensions#whitespace#enabled = 1
 
 " enable/disable ale integration
@@ -454,10 +432,6 @@ endfunction
 
 autocmd FileType tex,markdown nnoremap <leader>j :call Vimtex()<CR>
 autocmd FileType tex,markdown nnoremap <leader>k :call ToggleAutoLine()<CR>
-
-" Markdown -------------------------------
-let g:mkdp_browser = ''
-let g:markdown_mapping_switch_status = '<leader>s'
 
 " ALE --------------------------------
 

@@ -1,6 +1,7 @@
 " GoTo code navigation.
 " nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gd :call CocAction('jumpDefinition', 'vsp')<CR>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD :call CocAction('jumpDefinition', 'vsp')<CR>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)

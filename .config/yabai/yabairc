@@ -1,15 +1,39 @@
 #!/usr/bin/env bash
 
+# the scripting-addition must be loaded manually if
+# you are running yabai on macOS Big Sur. Uncomment
+# the following line to have the injection performed
+# when the config is executed during startup.
+#
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"zbar-spaces-jsx\"'"
+yabai -m signal --add event=application_launched \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"zbar-spaces-jsx\"'"
+yabai -m signal --add event=application_terminated \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"zbar-spaces-jsx\"'"
+yabai -m signal --add event=window_created \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"zbar-spaces-jsx\"'"
+yabai -m signal --add event=window_destroyed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"zbar-spaces-jsx\"'"
+
+# if using multple displays, add an additional rule for "display_changed" event
+yabai -m signal --add event=display_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"zbar-spaces-jsx\"'"
 # ====== Variables =============================
 
-gaps_top="55"
-gaps_bottom="20"
-gaps_left="20"
-gaps_right="20"
+gaps_top="40"
+gaps_bottom="10"
+gaps_left="10"
+gaps_right="10"
 gaps_inner="0"
 
-normal_border_color="393833"
-focused_border_color="ffa674"
+normal_border_color="263238"
+focused_border_color="C3E88D"
 preselect_border_color="848c8d"
 
 # ====== Tiling settings =======================
@@ -22,8 +46,8 @@ yabai -m config left_padding                "${gaps_left}"
 yabai -m config right_padding               "${gaps_right}"
 yabai -m config window_gap                  "${gaps_inner}"
 
-yabai -m config mouse_follows_focus         off
-yabai -m config focus_follows_mouse         off
+yabai -m config mouse_follows_focus         on
+yabai -m config focus_follows_mouse         autofocus
 
 yabai -m config mouse_modifier              fn
 yabai -m config mouse_action1               move
