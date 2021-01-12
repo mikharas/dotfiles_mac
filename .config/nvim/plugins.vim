@@ -41,6 +41,9 @@ Plug 'majutsushi/tagbar'
 " Language syntax parser
 Plug 'nvim-treesitter/nvim-treesitter'
 
+" rainbow parenthesis for ts tree
+Plug 'p00f/nvim-ts-rainbow'
+
 " Search results counter
 Plug 'vim-scripts/IndexedSearch'
 
@@ -123,10 +126,17 @@ Plug 'mattn/emmet-vim'
 " Vim smooth scrolling
 Plug 'yuttie/comfortable-motion.vim'
 
+" ------------- R ------------- "
+Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
+
 " ---------- JAVASCRIPT -----------"
 
 Plug 'heavenshell/vim-jsdoc'
 Plug 'moll/vim-node'
+
+" --------- APPLESCRIPT ----------- "
+
+Plug 'dearrrfish/vim-applescript'
 
 " ----------- JAVA -------------"
 Plug 'vim-test/vim-test'
@@ -187,10 +197,17 @@ call plug#end()
 " Plugins settings and mappings
 " Edit them as you wish.
 
+" MARKDOWN -----------------
+let g:markdown_enable_insert_mode_mappings = 0
+
 " TREESITTER -----------------
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
     -- Modules and its options go here
+    rainbow = {
+        enable = true,
+        disable = {'bash'}
+    },
     highlight = {
         enable = true,
     },
@@ -350,7 +367,7 @@ aug END
 " Airline -------------------------------
 
 let g:airline_powerline_fonts = 0
-let g:airline_theme = 'material'
+let g:airline_theme = 'gruvbox_material'
 let g:airline#extensions#whitespace#enabled = 1
 
 " enable/disable ale integration

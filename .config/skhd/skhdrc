@@ -7,7 +7,7 @@ shift + cmd - a : m volume down
 shift + cmd - s : m volume up
 shift + cmd - d : m volume mute
 
-# open terminal
+# open terminal and google chrome
 cmd - return : open -na /Applications/iTerm.app
 shift + cmd - return : open -na /Applications/Google\ Chrome.app
 

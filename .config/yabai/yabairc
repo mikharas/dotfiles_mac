@@ -32,8 +32,8 @@ gaps_left="10"
 gaps_right="10"
 gaps_inner="0"
 
-normal_border_color="263238"
-focused_border_color="C3E88D"
+normal_border_color="393833"
+focused_border_color="ffa674"
 preselect_border_color="848c8d"
 
 # ====== Tiling settings =======================
@@ -48,6 +48,8 @@ yabai -m config window_gap                  "${gaps_inner}"
 
 yabai -m config mouse_follows_focus         on
 yabai -m config focus_follows_mouse         autofocus
+
+# yabai -m config --space 1 layout float
 
 yabai -m config mouse_modifier              fn
 yabai -m config mouse_action1               move

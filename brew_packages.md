@@ -1,4 +1,4 @@
-autopep8
+autopep9
 brightness
 calcurse
 cmake
@@ -18,6 +18,7 @@ neovim (HEAD)
 openjdk
 pandoc
 pylint
+r
 ranger
 ripgrep
 koekeishiya/formulae/skhd

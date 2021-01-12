@@ -7,12 +7,12 @@ const containerStyle = {
   padding: '2px 0',
 };
 
-// const spaceColors = ['#b48eaa', '#cb6153', '#ffa674', '#fec26a', '#99bfab', '#b48c8d'];
-const spaceColors = ['#BB80B3', '#FF5370', '#F78C6C', '#FFCB6B', '#C3E88D', '#82AAFF'];
+const spaceColors = ['#b48eaa', '#cb6153', '#ffa674', '#fec26a', '#99bfab', '#b48c8d'];
+// const spaceColors = ['#BB80B3', '#FF5371', '#F78C6C', '#FFCB6B', '#C3E88D', '#82AAFF'];
 
 const renderSpace = ({ index, windows, focused }) => {
   const contentStyle = {
-    color: '#2f2f2f',
+    color: '#393833',
     backgroundColor: focused
       ? spaceColors[index % spaceColors.length]
       : 'grey',

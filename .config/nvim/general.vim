@@ -20,7 +20,7 @@ autocmd TermOpen * setlocal nonumber norelativenumber
 "colorscheme
 let &t_Co = 256
 set background=dark
-colorscheme vim-material
+colorscheme gruvbox8
 
 let g:python3_host_prog = '/usr/bin/python3'
 
@@ -120,6 +120,7 @@ au BufNewFile,BufRead *.ts,*.tsx,*.js,*.xml,*.html,*.css
     \ set tabstop=2     |
     \ set softtabstop=2 |
     \ set shiftwidth=2  |
+    \ set textwidth=100 |
     \ set autoindent    |
     \ set smartindent   |
     \ set expandtab     |
