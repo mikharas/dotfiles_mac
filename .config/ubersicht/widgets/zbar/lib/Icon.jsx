@@ -1,53 +1,96 @@
 const getIcon = appName => {
-    let className = null;
+  switch (appName) {
+    case 'Activity Monitor':
+      return 'fas fa-heartbeat';
 
-    if (appName == 'Google Chrome') {
-        className="fa fa-chrome";
-    } else if (appName == 'zoom.us') {
-        className="fa fa-video-camera"
-    } else if (appName == 'KakaoTalk') {
-        className="fa fa-comments"
-    } else if (appName == 'Unity') {
-        className="fa fa-gamepad";
-    } else if (appName == 'Discord') {
-        className="fa fa-discord";
-    } else if (appName == 'Music') {
-        className="fa fa-music";
-    } else if (appName == 'Finder') {
-        className="fa fa-folder";
-    } else if (appName == 'qBittorrent') {
-        className="fa fa-download";
-    } else if (appName == 'Calendar') {
-        className="la la-calendar";
-    } else if (appName == 'iTerm2') {
-        className="fa fa-terminal";
-    } else if (appName == 'Mail') {
-        className="fa fa-envelope";
-    } else if (appName == 'Xcode') {
-        className="fab fa-xing";
-    } else if (appName == 'Spotify') {
-        className="la la-spotify";
-    } else if (appName == 'Preview') {
-        className="la la-file-text";
-    } else if (appName == 'Microsoft Excel') {
-        className="la la-th-list"
-    } else if (appName == 'qbittorrent') {
-        className="la la-cloud-download"
-    } else if (appName == 'mpv') {
-        className="la la-play-circle"
-    } else if (appName == 'None') {
-        className="la la-circle"
-    } else if (appName == 'Lightroom Classic' | appName == 'Photoshop CC') {
-        className="la la-camera-retro"
-    } else if (appName == 'Adobe Premiere Pro CC 2019' | appName == 'Final Cut Pro' | appName == 'Adobe Media Encoder CC 2019') {
-        className="la la-video-camera"
-    } else if (appName == 'System Preferences') {
-        className="fa fa-cogs"
-    } else {
-        className="fa fa-question-circle";
-    }
+    case 'Android Studio':
+      return 'fab fa-android';
 
-    return className;
+    case 'App Store':
+      return 'fab fa-app-store-ios';
+
+    case 'Calculator':
+      return 'fas fa-calculator';
+
+    case 'Calendar':
+      return 'far fa-calendar-alt';
+
+    case 'Discord':
+      return 'fab fa-discord';
+
+    case 'FaceTime':
+      return 'fas fa-phone-square';
+
+    case 'Final Cut Pro':
+      return 'fas fa-photo-video';
+
+    case 'Finder':
+      return 'fa fa-folder';
+
+    case 'Google Chrome':
+      return 'fab fa-chrome';
+
+    case 'iTerm2':
+      return 'fa fa-terminal';
+
+    case 'KakaoTalk':
+      return 'fa fa-comments';
+
+    case 'Lightroom Classic': 
+    case 'Photoshop CC':
+      return 'fas fa-camera-retro';
+
+    case 'Mail':
+      return 'fa fa-envelope';
+
+    case 'Messenger':
+      return 'fab fa-facebook-messenger';
+
+    case 'Microsoft Excel':
+      return 'fas fa-table';
+
+    case 'Music':
+      return 'fa fa-music';
+
+    case 'Notes':
+      return 'fas fa-sticky-note';
+
+    case 'Pock':
+      return '';
+
+    case 'Preview':
+      return 'fas fa-file-alt';
+
+    case 'qBittorrent':
+      return 'fas fa-download';
+
+    case 'QuickTime Player':
+      return 'fas fa-play-circle';
+
+    case 'Reminders':
+      return 'fas fa-list-ul';
+
+    case 'Spotify':
+      return 'fab fa-spotify';
+
+    case 'Spotlight':
+      return 'fas fa-search';
+
+    case 'System Preferences':
+      return 'fa fa-cogs';
+
+    case 'Unity':
+      return 'fa fa-gamepad';
+
+    case 'Xcode':
+      return 'fab fa-xing';
+
+    case 'zoom.us':
+      return 'fa fa-video-camera';
+
+    default:
+      return 'fa fa-question-circle';
+  }
 }
 
 const style = {
@@ -56,9 +99,7 @@ const style = {
 };
 
 export default ({ appName }) => {
-    const iconClass = getIcon(appName);
-    const fontScale = (iconClass.slice(0,2) == 'fa') ? '1.3em' : '1.7em'
-    return (
-        <i className={iconClass} style={{ ...style, fontSize: fontScale }}/>
-    );
+  const iconClass = getIcon(appName);
+  const fontScale = (iconClass.slice(0,2) == 'fa') ? '1.3em' : '1.7em'
+  return iconClass && <i className={iconClass} style={{ ...style, fontSize: fontScale }}/>
 }

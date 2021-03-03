@@ -4,7 +4,7 @@ Performance oriented [Übersicht](https://github.com/felixhageloh/uebersicht) wi
 
 I forked from [nibar](https://github.com/kkga/nibar) and trimmed down features to make the bar as performance-friendly as possible.
 
-![img](./ss.png)
+![Preview](/preview.png?raw=true "Preview")
 
 ## Installation
 

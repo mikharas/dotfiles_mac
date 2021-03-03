@@ -118,6 +118,15 @@ export QT_SCALE_FACTOR=2.5
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 
+# compile C programs
+
+compile() {
+    gcc -Wall -o -std=gnu99 -o $(echo $1 | cut -d '.' -f 1) $1
+}
+
+compileAll() {
+    for F in ./*.c; do gcc -Wall -o -std=gnu99 -o ${F%.c} $F; done
+}
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"

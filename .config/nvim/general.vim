@@ -1,4 +1,5 @@
 " ====== GENERAL SETTINGS ===========
+set updatetime=100
 " buffer
 set hidden
 
@@ -19,13 +20,15 @@ autocmd TermOpen * setlocal nonumber norelativenumber
 
 "colorscheme
 let &t_Co = 256
-set background=dark
-colorscheme gruvbox8
+set background=light
+colorscheme gruvbox8_soft
+" colorscheme gruvbox8
 
 let g:python3_host_prog = '/usr/bin/python3'
 
 " change leader key to comma
 let mapleader=","
+let maplocalleader=","
 
 " tabs and spaces handling
 set expandtab
@@ -95,12 +98,8 @@ endfunction
 command Make !make; ./test; make clean
 
 " ====== FILETYPE SPECIFIC ===========
-" flag unnecessary whitespace
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Cursor /\s\+$/
-" autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript.tsx
-
 " tabs and spaces handling
-au BufNewFile,BufRead *.py
+au BufNewFile,BufRead *.py,*.c
     \ set tabstop=4     |
     \ set softtabstop=4 |
     \ set shiftwidth=4  |
@@ -108,7 +107,7 @@ au BufNewFile,BufRead *.py
     \ set expandtab     |
     \ set autoindent    |
 
-au BufNewFile,BufRead *.md,*.txt,*.tex,*.latex
+au BufNewFile,BufRead *.md,*.txt,*.tex,*.latex,*.Rmd
     \ set tabstop=4     |
     \ set softtabstop=4 |
     \ set shiftwidth=4  |
@@ -116,7 +115,7 @@ au BufNewFile,BufRead *.md,*.txt,*.tex,*.latex
     \ set textwidth=80  |
     \ set expandtab     |
 
-au BufNewFile,BufRead *.ts,*.tsx,*.js,*.xml,*.html,*.css
+au BufNewFile,BufRead *.ts,*.tsx,*.js,*.jsx,*.xml,*.html,*.css
     \ set tabstop=2     |
     \ set softtabstop=2 |
     \ set shiftwidth=2  |
@@ -125,19 +124,21 @@ au BufNewFile,BufRead *.ts,*.tsx,*.js,*.xml,*.html,*.css
     \ set smartindent   |
     \ set expandtab     |
 
-"refresh syntax on buf exit and enter for bug in styled components
-autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-
 " spellcheck on
 set spelllang=en_us
 set spellfile=~/.config/nvim/spell/en.utf-8.add
-autocmd BufNewFile,BufRead *.md,*.txt,*.tex setlocal spell
+
+augroup spellcheck
+    au!
+    autocmd BufNewFile,BufRead *.md,*.txt,*.tex,*tex,*rmd setlocal spell
+augroup end
 
 " enable folding for js and ts (may not work atm)
 augroup javascript_folding
     au!
     au FileType javascript,typescript setlocal foldmethod=syntax
+    autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+    autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 augroup END
 
 " Formatting c# files

@@ -31,8 +31,7 @@ nmap <leader>,f  <Plug>(coc-format-selected)
 xmap <leader>,a  <Plug>(coc-codeaction-selected)
 nmap <leader>,a  <Plug>(coc-codeaction-selected)
 "
-" Use `:Format` to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+nmap <leader>e :call CocAction('format')<CR>
 
 " Use `:Fold` to fold current buffer.
 command! -nargs=? Fold :call CocAction('fold', <f-args>)

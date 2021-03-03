@@ -46,64 +46,14 @@ nnoremap <silent> <leader>w : call WindowSwap#EasyWindowSwap()<CR>
 nnoremap <leader>r :call TermToggle(20)<CR>
 tnoremap <leader>t <C-\><C-n>:call TermToggle(20)<CR>
 
-"JSDoc
-autocmd FileType javascript nmap <leader>d :JsDoc<CR>
-
 " toggle tagbar display
 map <leader>2 :TagbarToggle<CR>
 
 " open nerdtree with the current file selected
 nnoremap <leader>1 :NERDTreeFind<CR>
 
-" format file syntax
-nnoremap <leader>e :Format<CR>
-
-" eslint correction
-autocmd FileType javascript,typescript,typescript.tsx nnoremap <leader>e :CocCommand eslint.executeAutofix<CR>
-
-" ========== ASYNCRUN ===============
-function! s:compile_and_run()
- let l:cmd = {
- \ 'c' : "gcc % -o %<; time ./%<",
- \ 'sh' : "time bash %",
- \ 'go' : "go run %",
- \ 'cpp' : "g++ -std=c++11 % -o %<; time ./%<",
- \ 'ruby' : "time ruby %",
- \ 'java' : "javac %; time java %<",
- \ 'rust' : "rustc % -o %<; time ./%<",
- \ 'python' : "time python %",
- \ 'typescript' : "./node_modules/ts-node %",
- \ 'javascript' : "node %",
- \ 'javascript.jsx' : "yarn start",
- \ 'html' : "chromium %",
- \ 'lilypond' : "lilypond %",
- \}
- let l:ft = &filetype
- if has_key(l:cmd, l:ft)
-   exec 'w'
-   exec "AsyncRun! ".l:cmd[l:ft]
- else
-   echoerr "AsyncRun not supported in current filetype!"
- endif
-
-endfunction
-
 "run asyncrun
-nnoremap gm :call <SID>compile_and_run()<CR>
-
-" execute python file in terminal
-autocmd FileType python nnoremap gm :CocCommand python.execInTerminal<CR>
-
-" compile tex file
-autocmd FileType tex nnoremap gm :VimtexCompile<CR>
-
-" markdown preview
-command MdToPdf !pandoc % -o %:r.pdf --template=template.tex --pdf-engine=lualatex
-" autocmd FileType markdown nnoremap gm :MarkdownPreview<CR>
-autocmd FileType markdown nnoremap gm :LivedownToggle<CR>
-autocmd FileType markdown nnoremap cm :MdToPdf<CR>
-autocmd FileType markdown nnoremap tb :Tab/\|<CR>
-
+nnoremap gm :call CompileAndRun()<CR>
 
 " mappings to jump to changed blocks for signify (git)
 nmap <leader>sn <plug>(signify-next-hunk)
@@ -145,6 +95,36 @@ nmap <leader>gl :Gclog<CR>
 nmap <leader>gdf :G difftool
 nmap <leader>gdd :Gdiff
 nmap <leader>gb :Gblame %<CR>
+
+function! s:markdownMappings()
+    nmap <buffer> gm :LivedownToggle<CR>
+    nmap <buffer> <localleader>tb :Tab/\|<CR>
+    nmap <buffer> <localleader>mk :!pandoc % -o %:r.pdf --template=template.tex --pdf-engine=lualatex<CR>
+endfunction
+
+function! s:customNvimRMappings()
+   nmap <buffer> <localleader>sr <Plug>RStart
+   nmap <buffer> <localleader>cr <Plug>RSaveClose
+   nmap <buffer> <localleader>sf <Plug>RSendFile
+   nmap <buffer> <localleader>sc <Plug>RSendChunkFH
+   vmap <buffer> <localleader>ss <Plug>RSendSelection
+   nmap <buffer> gm <Plug>RMakeRmd
+   nmap <buffer> <localleader>s <Plug>RSummary
+endfunction
+
+augroup markupLanguages
+    au!
+    autocmd filetype tex nmap <buffer> gm :VimtexCompile<CR>
+    autocmd filetype tex,markdown,rmd nmap <localleader>j :call ShowConcealed()<CR>
+    autocmd filetype tex,markdown,rmd nmap <buffer> <localleader>k :call ToggleAutoLine()<CR>
+augroup end
+
+augroup mappings
+    au!
+    autocmd filetype r,rmd call s:customNvimRMappings()
+    autocmd filetype markdown,md call s:markdownMappings()
+    autocmd filetype javascript,typescript,typescript.tsx nmap <buffer> <localleader>e :CocCommand eslint.executeAutofix<CR>
+augroup end
 
 " omnisharp
 augroup omnisharp_commands

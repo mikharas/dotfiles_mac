@@ -4,28 +4,14 @@ import parse from "./lib/parse.jsx";
 import styles from "./lib/styles.jsx";
 
 const style = {
-   borderRadius: '10px',
-    // width: '90%',
-    marginLeft: '25px',
-    marginRight: '25px',
-    padding: '3px 6px',
-    border: '1px solid #393833',
-    backgroundColor: '#393833',
-    color: '#ECEFF1',
-    fontFamily: 'Roboto',
-    fontSize: '12px',
-
-    height: '25px',
-
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    position: 'fixed',
-    left: '50%',
-    transform: 'translateX(-70%)',
-    top: '0.25%',
+  padding: "0 8px",
+  display: "grid",
+  gridAutoFlow: "column",
+  gridGap: "16px",
+  position: "fixed",
+  overflow: "hidden",
+  left: "0px",
+  top: "0px",
   fontFamily: styles.fontFamily,
   lineHeight: styles.lineHeight,
   fontSize: styles.fontSize,
@@ -34,7 +20,7 @@ const style = {
 };
 
 export const refreshFrequency = false;
-export const command = "./zbar/fetch.sh";
+export const command = "./zbar/scripts/spaces.sh";
 
 const populateWindowNames = ({ spaces, windows }) => {
   const id2window = windows.reduce((acc, { id, app }) => {
@@ -48,13 +34,11 @@ const populateWindowNames = ({ spaces, windows }) => {
   }))
 };
 
-export const render = ({ output }, ...args) => {
+export const render = ({ output }) => {
   const data = parse(output);
   if (typeof data === "undefined") {
     return (
-      <div style={style}>
-        <Error msg="Error: unknown script output" side="left" />
-      </div>
+      <div style={style} />
     );
   }
   if (typeof data.error !== "undefined") {

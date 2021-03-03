@@ -26,7 +26,7 @@ yabai -m signal --add event=display_changed \
     action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"zbar-spaces-jsx\"'"
 # ====== Variables =============================
 
-gaps_top="40"
+gaps_top="25"
 gaps_bottom="10"
 gaps_left="10"
 gaps_right="10"
@@ -46,8 +46,10 @@ yabai -m config left_padding                "${gaps_left}"
 yabai -m config right_padding               "${gaps_right}"
 yabai -m config window_gap                  "${gaps_inner}"
 
-yabai -m config mouse_follows_focus         on
-yabai -m config focus_follows_mouse         autofocus
+yabai -m config mouse_follows_focus         off
+yabai -m config focus_follows_mouse         off
+# yabai -m config mouse_follows_focus         on
+# yabai -m config focus_follows_mouse         autofocus
 
 # yabai -m config --space 1 layout float
 

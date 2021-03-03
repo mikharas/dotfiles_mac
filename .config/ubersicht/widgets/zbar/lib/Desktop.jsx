@@ -7,29 +7,29 @@ const containerStyle = {
   padding: '2px 0',
 };
 
-const spaceColors = ['#b48eaa', '#cb6153', '#ffa674', '#fec26a', '#99bfab', '#b48c8d'];
-// const spaceColors = ['#BB80B3', '#FF5371', '#F78C6C', '#FFCB6B', '#C3E88D', '#82AAFF'];
+const spaceColors = ['#d3869b', '#fb4934', '#fe8019', '#fabd2f', '#83a598', '#d3869b'];
 
 const renderSpace = ({ index, windows, focused }) => {
   const contentStyle = {
-    color: '#393833',
+    color: '#2f2f2f',
     backgroundColor: focused
       ? spaceColors[index % spaceColors.length]
       : 'grey',
     fontSize: '12px',
     fontWeight: 'bold',
-    margin: '0',
-    padding: '0 0.5em',
+    margin: '0 0.4em',
+    padding: '0 0.6em',
     display: 'flex',
     alignItems: 'center',
     height: '20px',
-    borderRadius: '4px',
+    borderRadius: '5px',
   };
 
   return (
     <div style={contentStyle}>
+      <div>{windows.appName}</div>
       {'[' + index + ']'}
-      { windows.map(({ appName }) => <Icon appName={appName} />) }
+      { windows.map(app => app && <Icon appName={app.appName} />) }
     </div>
   );
 };

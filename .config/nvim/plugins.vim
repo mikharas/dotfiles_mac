@@ -367,7 +367,7 @@ aug END
 " Airline -------------------------------
 
 let g:airline_powerline_fonts = 0
-let g:airline_theme = 'gruvbox_material'
+let g:airline_theme = 'gruvbox8'
 let g:airline#extensions#whitespace#enabled = 1
 
 " enable/disable ale integration
@@ -408,6 +408,33 @@ augroup spacevimAsyncRun
     autocmd User AsyncRunStart call asyncrun#quickfix_toggle(9, 1)
 augroup END
 
+function! CompileAndRun()
+ let l:cmd = {
+ \ 'c' : "gcc % -o %<; time ./%<",
+ \ 'sh' : "time bash %",
+ \ 'go' : "go run %",
+ \ 'cpp' : "g++ -std=c++11 % -o %<; time ./%<",
+ \ 'ruby' : "time ruby %",
+ \ 'r' : "Rscript %",
+ \ 'java' : "javac %; time java %<",
+ \ 'rust' : "rustc % -o %<; time ./%<",
+ \ 'python' : "time python3 -i %",
+ \ 'typescript' : "./node_modules/ts-node %",
+ \ 'javascript' : "node %",
+ \ 'javascript.jsx' : "yarn start",
+ \ 'html' : "chromium %",
+ \ 'lilypond' : "lilypond %",
+ \}
+ let l:ft = &filetype
+ if has_key(l:cmd, l:ft)
+   exec 'w'
+   exec "AsyncRun -mode=term -pos=bottom ".l:cmd[l:ft]
+   " exec "AsyncRun! ".l:cmd[l:ft]
+ else
+   echoerr "AsyncRun not supported in current filetype!"
+ endif
+
+endfunction
 " indentLine -----------------------------
 
 let g:indentLine_enabled = 1
@@ -427,7 +454,7 @@ let g:vimtex_compiler_latexmk = {
     \ 'build_dir' : '.build',
     \}
 
-function Vimtex()
+function ShowConcealed()
     set concealcursor=""
     set updatetime=500
     setlocal spell
@@ -446,9 +473,6 @@ function! ToggleAutoLine()
         let s:enabled = 1
     endif
 endfunction
-
-autocmd FileType tex,markdown nnoremap <leader>j :call Vimtex()<CR>
-autocmd FileType tex,markdown nnoremap <leader>k :call ToggleAutoLine()<CR>
 
 " ALE --------------------------------
 
@@ -484,37 +508,10 @@ let g:mta_filetypes = {
     \ 'jinja' : 1,
     \}
 
-" Pymode ------------------------------
-" turn off warnings
-" let g:pymode_warnings = 0
-" let g:pymode_lint = 0
-
-" OMNISHARP --------------------------
-" let g:OmniSharp_server_stdio = 1
-" let g:omnicomplete_fetch_full_documentation = 1
-" let g:OmniSharp_server_use_mono = 1
-" let g:OmniSharp_server_path = '/Users/snowpipe/omnisharp-linux-x64/run'
-
-" SEMSHI --------------------------
-
-" function MyCustomHighlights()
-    " hi semshiLocal           ctermfg=209 guifg=#ed8824
-    " hi semshiGlobal          ctermfg=214 guifg=#c6aa69
-    " hi semshiImported        ctermfg=214 guifg=#ed8824 cterm=bold gui=bold
-    " hi semshiParameter       ctermfg=75  guifg=#6f8d7a
-    " hi semshiParameterUnused ctermfg=117 guifg=#b84138 cterm=underline gui=underline
-    " hi semshiFree            ctermfg=218 guifg=#939c69
-    " hi semshiBuiltin         ctermfg=207 guifg=#448487
-    " hi semshiAttribute       ctermfg=49  guifg=#76968b
-    " hi semshiSelf            ctermfg=249 guifg=#ed8824
-    " hi semshiUnresolved      ctermfg=226 guifg=#ffff00 cterm=underline gui=underline
-    " hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
-"
-    " hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
-    " hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
-" endfunction
-" autocmd FileType python call MyCustomHighlights()
-"
 " Gruvbox 8 ----------------------------------
 
-let g:gruvbox_transp_bg = 1
+let g:gruvbox_transp_bg = 0
+
+" NVIMR ------------------------------------
+
+let R_auto_start = 2
