@@ -1,3 +1,5 @@
+import styles from './styles.jsx';
+
 const getIcon = appName => {
   switch (appName) {
     case 'Activity Monitor':
@@ -36,7 +38,7 @@ const getIcon = appName => {
     case 'KakaoTalk':
       return 'fa fa-comments';
 
-    case 'Lightroom Classic': 
+    case 'Lightroom Classic':
     case 'Photoshop CC':
       return 'fas fa-camera-retro';
 
@@ -98,8 +100,14 @@ const style = {
   color: '#2e3440',
 };
 
-export default ({ appName }) => {
+export default ({ focused, appName }) => {
   const iconClass = getIcon(appName);
   const fontScale = (iconClass.slice(0,2) == 'fa') ? '1.3em' : '1.7em'
-  return iconClass && <i className={iconClass} style={{ ...style, fontSize: fontScale }}/>
+  return iconClass && <i
+    className={iconClass}
+    style={{
+      ...style,
+        color: focused ? styles.colors.workspace_active_fg : styles.colors.workspace_inactive_fg,
+      fontSize: fontScale,
+    }}/>
 }

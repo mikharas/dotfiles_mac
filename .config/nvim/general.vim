@@ -20,8 +20,8 @@ autocmd TermOpen * setlocal nonumber norelativenumber
 
 "colorscheme
 let &t_Co = 256
-set background=light
-colorscheme gruvbox8_soft
+set background=dark
+colorscheme gruvbox8
 " colorscheme gruvbox8
 
 let g:python3_host_prog = '/usr/bin/python3'

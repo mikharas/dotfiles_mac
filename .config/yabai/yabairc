@@ -26,15 +26,15 @@ yabai -m signal --add event=display_changed \
     action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"zbar-spaces-jsx\"'"
 # ====== Variables =============================
 
-gaps_top="25"
-gaps_bottom="10"
-gaps_left="10"
-gaps_right="10"
-gaps_inner="0"
+gaps_top="50"
+gaps_bottom="30"
+gaps_left="30"
+gaps_right="30"
+gaps_inner="20"
 
 normal_border_color="393833"
-focused_border_color="ffa674"
-preselect_border_color="848c8d"
+# focused_border_color="ffa674"
+# preselect_border_color="848c8d"
 
 # ====== Tiling settings =======================
 

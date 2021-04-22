@@ -1,27 +1,29 @@
 import Icon from './Icon.jsx';
+import styles from './styles.jsx';
 
 const containerStyle = {
   display: "grid",
   gridAutoFlow: "column",
-  gridGap: "8px",
-  padding: '2px 0',
+  gridGap: "4px",
+  padding: '3px 30px',
+  paddingLeft: '700px',
 };
 
-const spaceColors = ['#d3869b', '#fb4934', '#fe8019', '#fabd2f', '#83a598', '#d3869b'];
+const spaceColors = styles.colors.workspace_active_bg;
 
 const renderSpace = ({ index, windows, focused }) => {
   const contentStyle = {
-    color: '#2f2f2f',
+    color: focused ? styles.colors.workspace_active_fg : styles.colors.workspace_inactive_fg,
     backgroundColor: focused
       ? spaceColors[index % spaceColors.length]
-      : 'grey',
+      : styles.colors.workspace_inactive,
     fontSize: '12px',
     fontWeight: 'bold',
     margin: '0 0.4em',
     padding: '0 0.6em',
     display: 'flex',
     alignItems: 'center',
-    height: '20px',
+    height: '25px',
     borderRadius: '5px',
   };
 
@@ -29,7 +31,7 @@ const renderSpace = ({ index, windows, focused }) => {
     <div style={contentStyle}>
       <div>{windows.appName}</div>
       {'[' + index + ']'}
-      { windows.map(app => app && <Icon appName={app.appName} />) }
+      { windows.map(app => app && <Icon focused={focused} appName={app.appName} />) }
     </div>
   );
 };

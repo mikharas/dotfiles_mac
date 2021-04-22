@@ -2,11 +2,12 @@ import styles from "./lib/styles.jsx";
 
 const style = {
   background: styles.colors.bg,
+  opacity: "0.9",
   cursor: "default",
   userSelect: "none",
   zIndex: "-1",
   width: "100%",
-  height: "24px",
+  height: "30px",
   position: "fixed",
   overflow: "hidden",
   top: "0px",

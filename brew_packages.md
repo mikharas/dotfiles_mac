@@ -1,4 +1,5 @@
 autopep9
+bat
 brightness
 calcurse
 cmake
@@ -6,6 +7,7 @@ cmus
 ctags
 eslint
 flake8
+font-fira-code-nerd-font
 heroku/brew/heroku
 htop
 mariadb

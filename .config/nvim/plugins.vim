@@ -174,6 +174,7 @@ Plug 'lifepillar/vim-gruvbox8'
 
 " Add filetype icons to vim plugins (NERDTree)
 Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " ------------------ INACTIVE PLUGINS ----------------- "
 " Plug 'Xuyuanp/scrollbar.nvim'
@@ -215,7 +216,6 @@ require'nvim-treesitter.configs'.setup {
     textobjects = { enable = true },
 }
 EOF
-
 
 " JSDOC
 let g:jsdoc_allow_input_prompt = 1
@@ -270,70 +270,120 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 " Fzf ------------------------------
+" Using the custom window creation function
+let g:fzf_layout = {
+  \ 'window': {
+  \   'width': 0.95,
+  \   'height': 0.95,
+  \   'yoffset': 0.25,
+  \ }
+  \ }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors = {
+  \ 'fg': ['fg', 'Normal'],
+  \ 'bg': ['bg', 'Normal'],
+  \ 'hl': ['fg', 'Comment'],
+  \ 'fg+': ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+': ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+': ['fg', 'Statement'],
+  \ 'info': ['fg', 'PreProc'],
+  \ 'border': ['fg', 'Ignore'],
+  \ 'prompt': ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker': ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header': ['fg', 'Comment'],
+  \ }
 
 " Reverse the layout to make the FZF list top-down
 let $FZF_DEFAULT_OPTS='--layout=reverse'
+if executable('rg')
+  " Overriding fzf.vim's default :Files command.
+  " Pass zero or one args to Files command (which are then passed to FzfFiles). Support file path completion too.
+  command! -nargs=? -complete=file Files call FzfFiles(<q-args>)
 
-" Using the custom window creation function
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+  " Ripgrep setting with preview window
+  command! -nargs=* -bang Rg call FzfRg(<q-args>, <bang>0)
 
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+endif
 
-" Function to create the custom floating window
-function! FloatingFZF()
-  " creates a scratch, unlisted, new, empty, unnamed buffer
-  " to be used in the floating window
-  let buf = nvim_create_buf(v:false, v:true)
+let $BAT_CMD = 'bat --style=numbers,changes --color always'
 
-  " 90% of the height
-  let height = float2nr(&lines * 0.9)
-  " 60% of the height
-  let width = float2nr(&columns * 0.6)
-  " horizontal position (centralized)
-  let horizontal = float2nr((&columns - width) / 2)
-  " vertical position (one line down of the top)
-  let vertical = 1
+function! FzfFiles(qargs) abort
+  let s:file_options = '--preview "' . $BAT_CMD . ' {2..-1} | head -'.&lines.'" --expect=ctrl-t,ctrl-v,ctrl-x --multi --bind=ctrl-a:select-all,ctrl-d:deselect-all'
 
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': vertical,
-        \ 'col': horizontal,
-        \ 'width': width,
-        \ 'height': height
-        \ }
+  function! s:files(dir)
+    let l:cmd = 'rg --files --hidden --glob "!{.git,node_modules,vendor}" --smart-case'
+    if a:dir != ''
+      let l:cmd .= ' ' . shellescape(a:dir)
+    endif
+    let l:files = split(system(l:cmd), '\n')
+    return s:prepend_icon(l:files)
+  endfunction
 
-" open the new window, floating, and enter to it
-call nvim_open_win(buf, v:true, opts)
+  function! s:prepend_icon(candidates)
+    let l:result = []
+    for l:candidate in a:candidates
+      let l:filename = fnamemodify(l:candidate, ':p:t')
+      let l:extension = fnamemodify(l:candidate, ':e')
+      let l:icon = GetWebDevIcons(l:filename, l:extension)
+      call add(l:result, printf('%s %s', l:icon, l:candidate))
+    endfor
+    return l:result
+  endfunction
+
+  function! s:edit_file(lines)
+    if len(a:lines) < 2 | return | endif
+    let l:action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \ }
+    let l:cmd = get(l:action, a:lines[0], 'e')
+
+    for l:item in a:lines[1:]
+      let l:pos = stridx(l:item, ' ')
+      let l:file_path = l:item[pos+1:-1]
+      execute 'silent '. l:cmd . ' ' . l:file_path
+    endfor
+  endfunction
+
+  call fzf#run(fzf#wrap({
+    \ 'source': <sid>files(a:qargs),
+    \ 'sink*': function('s:edit_file'),
+    \ 'options': '-m' . ' ' . s:file_options,
+    \ }))
 endfunction
 
-func! Test(a)
-    echom "cword: "."\"".a:a."\""
+function! FzfRg(query, fullscreen)
+  let command_fmt = 'rg --color=always --column --line-number --no-heading --smart-case -- %s | cut -d ":" -f 1,2,3'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec, 'right:60%'), a:fullscreen)
 endfunction
 
-" Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:60%'), <bang>0)
+" Nvim-web-devicons --------------------------
+lua << EOF
+require'nvim-web-devicons'.setup {
+   override = {
+    zsh = {
+      icon = "",
+      color = "#428850",
+      name = "json"
+     }
+    };
+  -- globally enable default icons (default to false)
+  default = true;
+}
+EOF
 
-" Ripgrep setting with preview window
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --no-heading --fixed-strings --line-number --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:60%'),
-  \   <bang>0)
+function! GetWebDevIcons(filename, extension)
+  let s:fn = luaeval("require'nvim-web-devicons'.get_icon")
+  return s:fn(a:filename, a:extension)
+endfunction
+
 
 " Window Swap -------------------------------
 
@@ -439,7 +489,7 @@ endfunction
 
 let g:indentLine_enabled = 1
 let g:indentLine_fileTypeExclude = ['tex', 'markdown']
-" let g:indentLine_setColors = 0
+let g:indentLine_setColors = 0
 let g:indentLine_char = '║'
 
 " VIMTEX -----------------------------------
@@ -510,7 +560,15 @@ let g:mta_filetypes = {
 
 " Gruvbox 8 ----------------------------------
 
-let g:gruvbox_transp_bg = 0
+let g:gruvbox_transp_bg = 1
+
+" Indent Guides -----------------------
+
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#cf8ef4   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#89ccf7 ctermbg=4
 
 " NVIMR ------------------------------------
 
