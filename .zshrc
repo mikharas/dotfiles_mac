@@ -27,7 +27,7 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-# export BAT_THEME="GitHub"
+export BAT_THEME="GitHub"
 
 if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases

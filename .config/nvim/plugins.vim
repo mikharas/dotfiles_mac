@@ -129,10 +129,13 @@ Plug 'yuttie/comfortable-motion.vim'
 " ------------- R ------------- "
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
 
-" ---------- JAVASCRIPT -----------"
+" ---------- JAVASCRIPT/TYPESCRIPT -----------"
 
 Plug 'heavenshell/vim-jsdoc'
+" Plug 'maxmellon/vim-jsx-pretty'
 Plug 'moll/vim-node'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " --------- APPLESCRIPT ----------- "
 
@@ -573,3 +576,4 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#89ccf7 ctermbg=4
 " NVIMR ------------------------------------
 
 let R_auto_start = 2
+

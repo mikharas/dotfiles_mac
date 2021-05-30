@@ -24,9 +24,9 @@ shift + cmd - k : yabai -m window --warp north
 shift + cmd - l : yabai -m window --warp east
 
 # Move focus container to workspace
-shift + cmd - m : yabai -m window --space last && yabai -m space --focus last
-shift + cmd - p : yabai -m window --space prev && yabai -m space --focus prev
-shift + cmd - n : yabai -m window --space next && yabai -m space --focus next
+#shift + cmd - m : yabai -m window --space last && yabai -m space --focus last
+#shift + cmd - p : yabai -m window --space prev && yabai -m space --focus prev
+#shift + cmd - n : yabai -m window --space next && yabai -m space --focus next
 shift + cmd - 1 : yabai -m window --space 1
 shift + cmd - 2 : yabai -m window --space 2
 shift + cmd - 3 : yabai -m window --space 3
@@ -98,4 +98,3 @@ shift + ctrl + cmd - r :
 
 # Make window native fullscreen
 cmd - f         : yabai -m window --toggle zoom-fullscreen
-shift + cmd - f : yabai -m window --toggle native-fullscreen

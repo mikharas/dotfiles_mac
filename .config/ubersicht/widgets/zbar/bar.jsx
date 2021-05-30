@@ -2,7 +2,6 @@ import styles from "./lib/styles.jsx";
 
 const style = {
   background: styles.colors.bg,
-  opacity: "0.9",
   cursor: "default",
   userSelect: "none",
   zIndex: "-1",

@@ -1,13 +1,22 @@
 export default {
   colors: {
-    fg: "#feffff",
-    bg: "#000000",
-    red: "#ff4c41",
-    workspace_active_fg: "#000000",
-    workspace_inactive_fg: "#feffff",
-    workspace_active_bg: ['#f5878a', '#ff4c41', '#f5878a', '#f6a71c', '#96bc00', '#4eb5e0'],
+    bg: "#f2e5bc",
+    fg: "#272727",
+    red: "#cc241d",
+    workspace_inactive_fg: "#272727",
+    workspace_active_fg: "#272727",
+    workspace_active_bg: ['#b16286', '#cc241d', '#d79921', '#b8bb26', '#458588'],
     workspace_inactive_bg: "#666666",
   },
+  // colors: {
+    // bg: "#feffff",
+    // fg: "#000000",
+    // red: "#ff4c41",
+    // workspace_inactive_fg: "#000000",
+    // workspace_active_fg: "#000000",
+    // workspace_active_bg: ['#f5878a', '#ff4c41', '#f5878a', '#f6a71c', '#96bc00', '#4eb5e0'],
+    // workspace_inactive_bg: "#666666",
+  // },
   // colors: {
     // bg: "#f4f4f7",
     // fg: "#373e4d",

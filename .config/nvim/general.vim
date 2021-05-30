@@ -20,7 +20,7 @@ autocmd TermOpen * setlocal nonumber norelativenumber
 
 "colorscheme
 let &t_Co = 256
-set background=dark
+set background=light
 colorscheme gruvbox8
 " colorscheme gruvbox8
 
@@ -121,7 +121,6 @@ au BufNewFile,BufRead *.ts,*.tsx,*.js,*.jsx,*.xml,*.html,*.css
     \ set shiftwidth=2  |
     \ set textwidth=100 |
     \ set autoindent    |
-    \ set smartindent   |
     \ set expandtab     |
 
 " spellcheck on

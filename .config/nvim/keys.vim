@@ -123,7 +123,7 @@ augroup mappings
     au!
     autocmd filetype r,rmd call s:customNvimRMappings()
     autocmd filetype markdown,md call s:markdownMappings()
-    autocmd filetype javascript,typescript,typescript.tsx nmap <buffer> <localleader>e :CocCommand eslint.executeAutofix<CR>
+    autocmd filetype javascript,typescript,typescript.tsx,typescriptreact nmap <buffer> <localleader>e :CocCommand eslint.executeAutofix<CR>
 augroup end
 
 " omnisharp
