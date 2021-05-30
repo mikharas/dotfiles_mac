@@ -35,10 +35,15 @@ const getIcon = appName => {
     case 'iTerm2':
       return 'fa fa-terminal';
 
+    case 'Journey':
+      return 'fas fa-book';
+
     case 'KakaoTalk':
       return 'fa fa-comments';
 
-    case 'Lightroom Classic':
+    case 'Logic Pro X':
+      return 'fas fa-record-vinyl';
+
     case 'Photoshop CC':
       return 'fas fa-camera-retro';
 
@@ -78,11 +83,17 @@ const getIcon = appName => {
     case 'Spotlight':
       return 'fas fa-search';
 
+    case 'stoic.':
+      return 'fas fa-book-medical';
+
     case 'System Preferences':
       return 'fa fa-cogs';
 
     case 'Unity':
       return 'fa fa-gamepad';
+
+    case 'Code':
+      return 'fas fa-code';
 
     case 'Xcode':
       return 'fab fa-xing';
